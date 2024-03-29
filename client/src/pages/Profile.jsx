@@ -251,11 +251,11 @@ export default function Profile() {
         {showListingsError ? "Error showing listings" : ""}
       </p>
 
-      {userListings &&
-        userListings.length > 0 &&
+      {userListings && userListings.length > 0 && (
         <div>
           <h1 className="text-center mt-7 text-2xl font-semibold">
-            Your Listings</h1>
+            Your Listings
+          </h1>
           {userListings.map((listing) => (
             <div
               key={listing._id}
@@ -273,18 +273,24 @@ export default function Profile() {
               hover:underline truncate flex-1"
                 to={`/listing/${listing._id}`}
               >
-                <p>
-                  {listing.name}
-                </p>
+                <p>{listing.name}</p>
               </Link>
-  
+
               <div className="flex flex-col items-center">
-                <button onClick={()=>handleListingDelete(listing._id)} className="text-red-700 uppercase">Delete</button>
-                <button className="text-green-700 uppercase">Edit</button>
+                <button
+                  onClick={() => handleListingDelete(listing._id)}
+                  className="text-red-700 uppercase"
+                >
+                  Delete
+                </button>
+                <Link to={`/update-listing/${listing._id}`}>
+                  <button className="text-green-700 uppercase">Edit</button>
+                </Link>
               </div>
             </div>
           ))}
-        </div>}
+        </div>
+      )}
     </div>
   );
 }
